@@ -6,8 +6,8 @@ public class RussianDollEnvelopes {
         if(envelopes == null || envelopes.length == 0)
             return 0;
 
-        // lambda
-        Arrays.sort(envelopes, (int[] a, int[] b) -> a[0]!=b[0]? a[0]-b[0]:a[1]-b[1]);
+        // using lambda instead of Comparator
+        Arrays.sort(envelopes, (int[] a, int[] b) -> a[0]!=b[0] ? a[0]-b[0] : a[1]-b[1]);
 
 //        Arrays.sort(envelopes, new Comparator<int[]>(){
 //            public int compare(int[] a, int[] b){
