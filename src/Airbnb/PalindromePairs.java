@@ -36,8 +36,8 @@ public class PalindromePairs {
             // abc d
             // either left part or right part will be compared to the other string
             int left = 0;
-            int right = 1;
-            while (left < right) {
+            int right = 0;
+            while (left <= right) {
                 // lookup reverse of substring(left, right) in map
                 // either left or right devides words[i] into 2 parts
                 Integer index = wordIndexMap.get(new StringBuilder(words[i].substring(left, right)).reverse().toString());
@@ -74,5 +74,6 @@ public class PalindromePairs {
     public static void main(String[] args) {
         System.out.println(palindromePairs(new String[]{"abcd","dcba","lls","s","sssll"}));
         System.out.println(palindromePairs(new String[]{"bat","tab","cat"}));
+        System.out.println(palindromePairs(new String[]{"a", ""}));
     }
 }
