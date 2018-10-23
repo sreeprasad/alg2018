@@ -23,6 +23,7 @@ public class RoundPrices {
         PrintArray.printLongArray(roundPrices(new double[]{1.3, 1.6}));         // 1, 2
         PrintArray.printLongArray(roundPrices(new double[]{1.1, 1.6, 1.7}));    // 1, 1, 2
         PrintArray.printLongArray(roundPrices(new double[]{1.3, 1.4, 1.9}));    // 1, 2, 2
+        PrintArray.printLongArray(roundPrices(new double[]{1.0, 1.0, 1.0}));    // 1, 1, 1
     }
     public static long[] roundPrices(double[] prices) {
 
