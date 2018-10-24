@@ -17,8 +17,13 @@ public class Vector2DIterator implements Iterator<Integer> {
 
     public Vector2DIterator(List<List<Integer>> vec2d) {
         this.vector = vec2d;
-        this.row = 0;
-        this.col = 0;
+        for (int i = 0; i < vec2d.size(); i++) {
+            if (vec2d.get(i) != null && vec2d.get(i).size() > 0) {
+                this.row = i;
+                this.col = 0;
+                break;
+            }
+        }
         this.canBeRemoved = false;
     }
 
@@ -30,8 +35,18 @@ public class Vector2DIterator implements Iterator<Integer> {
             if (col < vector.get(row).size() - 1) {
                 col++;
             } else {
-                row++;
-                col = 0;
+                boolean foundNext = false;
+                for (int i = row + 1; i < vector.size(); i++) {
+                    if (vector.get(i) != null && vector.get(i).size() > 0) {
+                        row = i;
+                        col = 0;
+                        foundNext = true;
+                        break;
+                    }
+                }
+                if (!foundNext) {
+                    row = vector.size();
+                }
             }
             return cur;
         } else {
@@ -42,10 +57,15 @@ public class Vector2DIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (vector == null || vector.size() == 0) {
+        if (vector == null || vector.size() == 0 || row >= vector.size()) {
             return false;
         }
-        return row < vector.size() && col < vector.get(row).size();
+        List<Integer> list = vector.get(row);
+        if (col < list.size()) {
+            return true;
+        }
+
+        return false;
     }
 
     /** copied from java.util.Iterator
@@ -80,7 +100,11 @@ public class Vector2DIterator implements Iterator<Integer> {
                 col--;
                 vector.get(row).remove(col);
             } else {
-                vector.get(row - 1).remove(vector.get(row - 1).size() - 1);
+                for (int i = row - 1; i >= 0; i--) {
+                    if (vector.get(i) != null && vector.get(i).size() > 0) {
+                        vector.get(i).remove(vector.get(i).size() - 1);
+                    }
+                }
             }
             canBeRemoved = false;
         }
@@ -103,6 +127,17 @@ public class Vector2DIterator implements Iterator<Integer> {
         while (vector2DIterator.hasNext()) {
             System.out.print(vector2DIterator.next() + " ");
             vector2DIterator.remove();
+        }
+        System.out.println();
+
+        List<List<Integer>> input2 = new ArrayList<>();
+        List<Integer> list4 = new ArrayList<>();
+        List<Integer> list5 = new ArrayList<>(); list5.add(3);
+        input2.add(list4); input2.add(list5);
+        vector2DIterator = new Vector2DIterator(input2);
+        System.out.println(input2);
+        while (vector2DIterator.hasNext()) {
+            System.out.print(vector2DIterator.next() + " ");
         }
     }
 }
