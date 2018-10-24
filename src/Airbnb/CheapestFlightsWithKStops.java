@@ -39,7 +39,7 @@ import java.util.PriorityQueue;
  * There will not be any duplicated flights or self cycles.
  */
 public class CheapestFlightsWithKStops {
-    public static int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+    public static int findCheapestPriceBFS(int n, int[][] flights, int src, int dst, int K) {
 
         // value of price[i][j] is the flight price from city i to city j, -1 if not exists
         int[][] prices = new int[n][n];
@@ -81,7 +81,51 @@ public class CheapestFlightsWithKStops {
         return -1;
     }
 
+    public static int findCheapestPriceDFS(int n, int[][] flights, int src, int dst, int K) {
+
+        // value of price[i][j] is the flight price from city i to city j, -1 if not exists
+        int[][] prices = new int[n][n];
+        for (int[] arr : prices) {
+            Arrays.fill(arr, -1);
+        }
+
+        // set prices
+        for (int[] flight : flights) {
+            // prices[from][to] = price
+            prices[flight[0]][flight[1]] = flight[2];
+        }
+
+        boolean[] visited = new boolean[n];
+        int[] result = new int[]{Integer.MAX_VALUE};
+
+        dfs(src, dst, K + 1 /* number of flights one can take */, prices, visited, 0, result);
+
+        return result[0] == Integer.MAX_VALUE ? -1 : result[0];
+    }
+
+    private static void dfs(int src, int dst, int K, int[][] prices, boolean[] visited, int cost, int[] result) {
+        if (src == dst) {
+            result[0] = cost;
+            return;
+        }
+        if (K == 0) {
+            return;
+        }
+        visited[src] = true;
+        for (int i = 0; i < prices[src].length; i++) {
+            int nextFlightCost = prices[src][i];
+            if (nextFlightCost != -1 && !visited[i]) {
+                if (cost + nextFlightCost >= result[0]) {
+                    continue;
+                }
+                dfs(i, dst, K - 1, prices, visited, cost + nextFlightCost, result);
+            }
+        }
+        visited[src] = false;
+    }
+
     public static void main(String[] args) {
-        System.out.println(findCheapestPrice(3, new int[][]{{0,1,100},{1,2,100},{0,2,500}}, 0, 2, 1));
+        System.out.println(findCheapestPriceBFS(3, new int[][]{{0,1,100},{1,2,100},{0,2,500}}, 0, 2, 1));
+        System.out.println(findCheapestPriceDFS(3, new int[][]{{0,1,100},{1,2,100},{0,2,500}}, 0, 2, 1));
     }
 }

@@ -148,6 +148,12 @@ public class PourWater {
         }
         return heights;
     }
+
+    /**
+     * follow up
+     * 1. print the heights
+     * 2. what if two sides are not infinite? answer: suppose heights is -1
+     */
     public static void main(String[] args) {
         PrintArray.printArray(pourWater(new int[]{2,1,1,2,1,2,2}, 4, 3));
         PrintArray.printArray(pourWater(new int[]{1,2,3,4}, 2, 2));
