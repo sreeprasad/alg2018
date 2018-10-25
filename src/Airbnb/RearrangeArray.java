@@ -1,6 +1,6 @@
 package Airbnb;
 
-import helpers.PrintArray;
+import utils.PrintArray;
 
 import java.util.Arrays;
 
