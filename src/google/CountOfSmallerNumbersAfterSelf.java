@@ -42,8 +42,8 @@ public class CountOfSmallerNumbersAfterSelf {
 		FenwickTree fenwickTree = new FenwickTree(rankMap.size());
 
 		// loop reversely as binary index tree is calculating prefix sum
-		for (int i = nums.length - 1; i >= 0; i--) {
-			result.add(fenwickTree.query(rankMap.get(nums[i]) - 1));
+		for (int i = nums.length - 1; i >= 0; i--) { // [1, 6, 2, 5]
+			result.add(fenwickTree.query(rankMap.get(nums[i]) - 1)); // query before update
 			fenwickTree.update(rankMap.get(nums[i]), 1);
 		}
 		Collections.reverse(result);
