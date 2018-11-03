@@ -1,5 +1,8 @@
 package google;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 853. Car Fleet
  * DescriptionHintsSubmissionsDiscussSolution
@@ -56,5 +59,53 @@ public class CarFleet {
     }
     public static void main(String[] args) {
         System.out.println(carFleet(12, new int[]{10,8,0,5,3}, new int[]{2,4,1,1,3}));
+        System.out.println(carFleetII(new int[]{2,4,1,3})); // [2, 2]
+        System.out.println(carFleetII(new int[]{2,5,4,3,1})); // [4, 1]
+    }
+    /*
+     * 变种：没有position
+     * Imagine a scenario where there are N cars on an infinitely long single-lane road. Each car has a unique,
+     * permanent integer speed ranging between 1 and N, inclusive (units are irrelevant).
+     * The cars can be placed in any order along the road and then told to start driving indefinitely.
+     * Let's assume that the cars are traveling from right-to-left. So the leftmost car is at the front.
+     * Given an ordering of N cars, construct an algorithm to return an array of cluster sizes
+     *
+     * N=4
+     *
+     * [2, 4, 1, 3]   -> [2, 2]
+     *
+     * [2, 5, 4, 3, 1] -> [4, 1]
+     *
+     */
+    public static List<Integer> carFleetII(int[] speed) {
+        List<Integer> result = new ArrayList<>();
+        int i = 0;
+        while (i < speed.length) {
+            int count = 1;
+            int j = i + 1;
+            while (j < speed.length && speed[j] > speed[i]) {
+                count++;
+                j++;
+            }
+            result.add(count);
+            i = j;
+        }
+        return result;
+    }
+    /* followup：
+     * New car speed = N+1.  Given an ordering of N cars, construct an algorithm to return an array of arrays of cluster sizes
+     * that will arise when the N+1 car is inserted.
+     * The ith row in the outer array corresponds to the cluster sizes that exist when the N+1 car is inserted into the ith index
+     *
+     * new car speed = 5
+     * [2, 2]
+     * [2, 4, 1, 3]  -> [[1, 2, 2], [3, 2], [3, 2], [2, 3], [2, 3]]
+     */
+    public static List<List<Integer>> carFleetIII(int[] speed, int newSpeed) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> carFleet = carFleetII(speed);
+        // not finished
+
+        return result;
     }
 }
