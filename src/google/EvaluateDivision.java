@@ -36,7 +36,7 @@ public class EvaluateDivision {
 		double[] answers = new double[queries.length];
 
 		for (int i = 0; i < queries.length; i++) {
-			Set<String> visited = new HashSet<>();
+			Set<String> visited = new HashSet<>(); // avoid infinite cycle
 			answers[i] = dfs(graph, queries[i][0], queries[i][1], 1.0, visited);
 		}
 		return answers;
