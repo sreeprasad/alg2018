@@ -2,7 +2,9 @@ package LinkedIn;
 
 import dataStructures.NestedInteger;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 364. Nested List Weight Sum II
@@ -41,6 +43,30 @@ public class NestedListWeightSumII {
 			} else {
 				sum += dfs(num.getList(), d + 1);
 			}
+		}
+		return sum;
+	}
+
+
+	// BFS
+	public int depthSumInverseII(List<NestedInteger> nestedList) {
+		Queue<NestedInteger> q = new LinkedList<>();
+		for (NestedInteger num : nestedList) {
+			q.offer(num);
+		}
+		int flatSum = 0;
+		int sum = 0;
+		while (!q.isEmpty()) {
+			int size = q.size();
+			for (int i = 0; i < size; i++) {
+				NestedInteger cur = q.poll();
+				if (cur.isInteger()) {
+					flatSum += cur.getInteger();
+				} else {
+					q.addAll(cur.getList());
+				}
+			}
+			sum += flatSum;
 		}
 		return sum;
 	}
