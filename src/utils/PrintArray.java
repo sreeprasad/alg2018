@@ -23,6 +23,13 @@ public class PrintArray {
         System.out.println();
     }
 
+    public static void printStringArray(String[] arr) {
+        for (String a : arr) {
+            System.out.print(a + " ");
+        }
+        System.out.println();
+    }
+
     // print 2-dim array
     public static void print2dimArray(int[][] arr) {
         for (int[] row : arr) {
