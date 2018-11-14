@@ -54,19 +54,19 @@ public class NestedListWeightSumII {
 		for (NestedInteger num : nestedList) {
 			q.offer(num);
 		}
-		int flatSum = 0;
+		int prevSum = 0;
 		int sum = 0;
 		while (!q.isEmpty()) {
 			int size = q.size();
 			for (int i = 0; i < size; i++) {
 				NestedInteger cur = q.poll();
 				if (cur.isInteger()) {
-					flatSum += cur.getInteger();
+					prevSum += cur.getInteger();
 				} else {
 					q.addAll(cur.getList());
 				}
 			}
-			sum += flatSum;
+			sum += prevSum;
 		}
 		return sum;
 	}
