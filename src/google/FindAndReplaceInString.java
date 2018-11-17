@@ -2,6 +2,8 @@ package google;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 833. Find And Replace in String
@@ -47,12 +49,35 @@ public class FindAndReplaceInString {
 		for (int[] sortedIndex : sortedIndexes) {
 			int strIndex = sortedIndex[0];
 			int i = sortedIndex[1];
-			if (S.substring(strIndex).startsWith(sources[i])) {
+			if (S.startsWith(sources[i], strIndex)) {
 				sb.insert(0, targets[i] + S.substring(strIndex + sources[i].length(), lastIndex));
 				lastIndex = strIndex;
 			}
 		}
 		sb.insert(0, S.substring(0, lastIndex)); // important
+		return sb.toString();
+	}
+	// straightforward & easy to understand
+	public String findReplaceStringII(String S, int[] indexes, String[] sources, String[] targets) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < indexes.length; i++) {
+			// if a match is found in the original string, record it
+			if (S.startsWith(sources[i], indexes[i])) {
+				map.put(indexes[i], i);
+			}
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < S.length(); ) {
+			if (map.containsKey(i)) {
+				// if a replacement was recorded before
+				sb.append(targets[map.get(i)]);
+				i += sources[map.get(i)].length();
+			} else {
+				// if no replacement happened at this index
+				sb.append(S.charAt(i));
+				i++;
+			}
+		}
 		return sb.toString();
 	}
 	public static void main(String[] args) {
