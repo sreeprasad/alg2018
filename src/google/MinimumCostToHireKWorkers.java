@@ -1,6 +1,7 @@
 package google;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -42,7 +43,7 @@ public class MinimumCostToHireKWorkers {
 		for (int i = 0; i < quality.length; i++) {
 			performanceQuality[i] = new double[]{(double) wage[i] / quality[i], (double) quality[i]};
 		}
-		Arrays.sort(performanceQuality, (a, b) -> (Double.compare(a[0], b[0]))); // 性价比高的在前面
+		Arrays.sort(performanceQuality, Comparator.comparingDouble(a -> a[0])); // 性价比高的在前面
 
 		PriorityQueue<Double> pq = new PriorityQueue<>((a, b) -> (Double.compare(b, a))); // 质量高的在前面
 
