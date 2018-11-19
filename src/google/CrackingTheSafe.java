@@ -27,6 +27,10 @@ import java.util.Set;
  * k^n will be at most 4096.
  */
 public class CrackingTheSafe {
+
+	// De Bruijn Sequences
+	// https://en.wikipedia.org/wiki/De_Bruijn_sequence
+	// https://www.youtube.com/watch?time_continue=397&v=iPLQgXUiU14
 	public String crackSafe(int n, int k) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < n; i++) { // first password
