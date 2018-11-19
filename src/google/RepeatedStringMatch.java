@@ -26,4 +26,23 @@ public class RepeatedStringMatch {
 		}
 		return -1;
 	}
+
+	// This solution is faster, 减少if判断
+	public int repeatedStringMatchII(String A, String B) {
+
+		int count = 0;
+		StringBuilder sb = new StringBuilder();
+		for (; sb.length() < B.length(); count++) {
+			sb.append(A);
+		}
+
+		if (sb.indexOf(B) != -1) {
+			return count;
+		}
+		if (sb.append(A).indexOf(B) != -1) {
+			return count + 1;
+		}
+
+		return -1;
+	}
 }
