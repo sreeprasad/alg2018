@@ -13,6 +13,8 @@ import java.util.Map;
  * https://www.1point3acres.com/bbs/thread-459125-1-1.html
  */
 public class EatPills {
+
+
 	// all combinations
 	public List<String> takePills(int n) { // n is number of pills
 		List<String> result = new ArrayList<>();
@@ -41,6 +43,9 @@ public class EatPills {
 		if (m > 0) dfs(n, m - 1, result, path + "H", goal, count, memo);
 	}
 
+
+
+
 	// calculate probability of 1 full pill and 0 half pill left
 	public double takePillsII(int n) { // n is number of pills
 		int[] count = new int[]{0, 0};
@@ -55,9 +60,29 @@ public class EatPills {
 		if (m > 0) dfsII(n, m - 1, count);
 	}
 
+
+	// calculate possibility from status (w, h) to status (wt, ht)
+	// w: whole, h: half, wt: target whole, ht: target half, bound: a factor to make cache key identical
+	public double dfsMemo(int w, int h, int wt, int ht, Map<String, Double> cache) {
+		if (w == wt && h == ht) { // target reached
+			return 1.0;
+		}
+		String key = "w" + w + "h" + h;
+		if (cache.containsKey(key)) { // if visited and cached
+			return cache.get(key);
+		}
+
+		// calculate sum of two different choices - w or h
+		double possibility = (w > wt ? (double) w / (w + h) * dfsMemo(w - 1, h + 1, wt, ht, cache) : 0)
+							+ (h > ht ? (double) h / (w + h) * dfsMemo(w, h - 1, wt, ht, cache) : 0);
+		cache.put(key, possibility);
+		return possibility;
+	}
+
 	public static void main(String[] args) {
 		EatPills ep = new EatPills();
-		System.out.println(ep.takePills(5 ));
+//		System.out.println(ep.takePills(5 ));
 //		System.out.println(ep.takePillsII(5));
+		System.out.println(ep.dfsMemo(5, 0, 1, 0, new HashMap<>()));
 	}
 }
