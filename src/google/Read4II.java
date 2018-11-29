@@ -53,6 +53,11 @@ public class Read4II {
 	private int read4(char[] buf) {
 		return new Random().nextInt(4);
 	}
+
+	public static void main(String[] args) {
+		Read4II r4 = new Read4II();
+		System.out.println(r4.read("filetestbuffer".toCharArray(), 6));
+	}
 }
 /* The read4 API is defined in the parent class Reader4.
       int read4(char[] buf); */
