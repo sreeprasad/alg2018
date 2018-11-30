@@ -26,6 +26,7 @@ import java.util.Stack;
  * Output: 6
  */
 public class CountCompleteTreeNodes {
+	// Solution 1: binary search on bottom level
 	public int countNodes(TreeNode root) {
 		if (root == null) return 0;
 		int height = 0;
@@ -36,7 +37,7 @@ public class CountCompleteTreeNodes {
 		}
 		int l = (int) Math.pow(2, height); // index of first node of bottom level
 		int r = (int) Math.pow(2, height + 1) - 1; // index of last node of bottom level
-		while (l + 1 < r) {
+		while (l + 1 < r) { // binary search on bottom level
 			int mid = l + (r - l) / 2;
 			if (exists(root, mid)) {
 				l = mid;
@@ -69,6 +70,29 @@ public class CountCompleteTreeNodes {
 		}
 		return true;
 	}
+
+	// Solution 2:
+	public int countNodesII(TreeNode root) {
+		int h = height(root);
+		int count = 0;
+		TreeNode cur = root;
+		while (cur != null) {
+			if (height(cur.right) == h - 1) {
+				count += (1 << h);
+				cur = cur.right;
+			} else {
+				count += (1 << (h - 1));
+				cur = cur.left;
+			}
+			h--; // next level
+		}
+		return count;
+	}
+	private int height(TreeNode node) {
+		if (node == null) return -1;
+		return 1 + height(node.left);
+	}
+
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(1);
 		TreeNode n2 = new TreeNode(2);
@@ -80,6 +104,6 @@ public class CountCompleteTreeNodes {
 		n2.left = n4; n2.right = n5;
 		n3.left = n6;
 		CountCompleteTreeNodes cctn = new CountCompleteTreeNodes();
-		System.out.println(cctn.countNodes(n1)); // 6
+		System.out.println(cctn.countNodesII(n1)); // 6
 	}
 }
