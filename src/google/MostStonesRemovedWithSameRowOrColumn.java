@@ -70,8 +70,7 @@ public class MostStonesRemovedWithSameRowOrColumn {
 		for (int i = 0; i < stones.length - 1; i++) {
 			for (int j = i + 1; j < stones.length; j++) {
 				if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]) {
-					if (uf.find(i) != uf.find(j)) {
-						uf.union(i, j);
+					if (uf.union(i, j)) {
 						removeCount++;
 					}
 				}
@@ -90,10 +89,14 @@ public class MostStonesRemovedWithSameRowOrColumn {
 			}
 		}
 
-		void union(int i, int j) {
+		boolean union(int i, int j) {
 			int pi = find(i);
 			int pj = find(j);
-			parent[pj] = pi;
+			if (pi != pj) {
+				parent[pj] = pi;
+				return true;
+			}
+			return false;
 		}
 
 		int find(int i) {
