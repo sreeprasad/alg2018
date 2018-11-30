@@ -33,6 +33,7 @@ import java.util.Set;
  * 0 <= stones[i][j] < 10000
  */
 public class MostStonesRemovedWithSameRowOrColumn {
+	// solution 1: DFS
 	public int removeStones(int[][] stones) {
 		int countGroup = 0;
 		Set<int[]> visited = new HashSet<>();
@@ -59,8 +60,51 @@ public class MostStonesRemovedWithSameRowOrColumn {
 			}
 		}
 	}
+
+
+
+	// solution 2: union find
+	public int removeStonesII(int[][] stones) {
+		int removeCount = 0;
+		UnionFind uf = new UnionFind(stones.length);
+		for (int i = 0; i < stones.length - 1; i++) {
+			for (int j = i + 1; j < stones.length; j++) {
+				if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]) {
+					if (uf.find(i) != uf.find(j)) {
+						uf.union(i, j);
+						removeCount++;
+					}
+				}
+			}
+		}
+		return removeCount;
+	}
+	class UnionFind {
+
+		int[] parent;
+
+		UnionFind(int n) {
+			parent = new int[n];
+			for (int i = 0; i < n; i++) {
+				parent[i] = i;
+			}
+		}
+
+		void union(int i, int j) {
+			int pi = find(i);
+			int pj = find(j);
+			parent[pj] = pi;
+		}
+
+		int find(int i) {
+			while (parent[i] != i) {
+				i = parent[i];
+			}
+			return i;
+		}
+	}
 	public static void main(String[] args) {
 		MostStonesRemovedWithSameRowOrColumn msrw = new MostStonesRemovedWithSameRowOrColumn();
-		System.out.println(msrw.removeStones(new int[][]{{0,0},{0,1},{1,0},{1,2},{2,1},{2,2}})); // 5
+		System.out.println(msrw.removeStonesII(new int[][]{{0,0},{0,1},{1,0},{1,2},{2,1},{2,2}})); // 5
 	}
 }
