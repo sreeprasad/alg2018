@@ -101,5 +101,6 @@ public class BombEnemy {
 		System.out.println(be.maxKilledEnemiesII(new char[][]{{'0','E','0','0'},{'E','0','W','E'},{'0','E','0','0'}})); // 3
 		System.out.println(be.maxKilledEnemiesII(new char[][]{{'E'}})); // 0
 		System.out.println(be.maxKilledEnemiesII(new char[][]{{'W'},{'E'},{'W'},{'0'},{'E'}})); // 1
+		System.out.println(be.maxKilledEnemiesII(new char[][]{{'E'},{'E'},{'E'}})); // 0
 	}
 }
