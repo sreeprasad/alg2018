@@ -45,7 +45,7 @@ public class CrackingTheSafe {
 	}
 
 	private boolean dfs(StringBuilder sb, int totalCount, Set<String> visited, int n, int k) {
-		if (visited.size() == totalCount) { // all posibilities are looped
+		if (visited.size() == totalCount) { // all possibilities are looped
 			return true;
 		}
 		String prev = sb.substring(sb.length() - n + 1);
