@@ -57,6 +57,7 @@ public class MeetingRoomsII {
 		Arrays.sort(ends);
 		int endIterator = 0;
 		int rooms = 0;
+		// thinking process: for each end time, count how many start time is before it
 		for (int i = 0; i < starts.length; i++) {
 			if (starts[i] < ends[endIterator]) {
 				rooms++;
