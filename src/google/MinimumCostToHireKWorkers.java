@@ -50,7 +50,7 @@ public class MinimumCostToHireKWorkers {
 		double result = Double.MAX_VALUE;
 		int qualitySum = 0;
 
-		for (double[] worker : performanceQuality) { // 当前worker是性价比最低的
+		for (double[] worker : performanceQuality) { // 当前worker是价性比最低的
 
 			qualitySum += worker[1];
 			pq.add(worker[1]);
