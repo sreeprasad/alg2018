@@ -53,6 +53,8 @@ import java.util.Map;
  * 0 <= tree[i] < tree.length
  */
 public class FruitIntoBaskets {
+
+	// in other words, find the longest consecutive sub-sequence which has only two numbers
 	public int totalFruit(int[] tree) {
 		int result = 0;
 		Map<Integer, Integer> map = new HashMap<>();

@@ -56,6 +56,30 @@ public class GuessTheWord {
 			}
 		}
 	}
+
+	// solution 2 with Random
+	public void findSecretWordII(String[] wordlist, Master master) {
+		for (int i = 0; i < 10; ++i) {
+			int index = new Random().nextInt(wordlist.length);
+			String str = wordlist[index];
+			int x = master.guess(str);
+
+			if (x == 6) {
+				return;
+			}
+
+			List<String> list = new ArrayList<>();
+
+			for (String w : wordlist) {
+				if (getMatchCount(str, w) == x) {
+					list.add(w);
+				}
+			}
+
+			wordlist = list.toArray(new String[list.size()]);
+		}
+	}
+
 	private int getMatchCount(String s1, String s2) {
 		int count = 0;
 		for (int i = 0; i < s1.length(); i++) {
