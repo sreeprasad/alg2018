@@ -16,7 +16,7 @@ package google;
 public class MissingNumber {
 	public int missingNumber(int[] nums) {
 		// 1. sort time O(nlgn) space O(1)
-		// 2. set time O(n) space O(n)
+		// 2. HashSet time O(n) space O(n)
 
 		// 3. xor time O(n) space O(1)
 		int xor = nums.length;
