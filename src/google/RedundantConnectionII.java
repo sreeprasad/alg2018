@@ -44,7 +44,7 @@ public class RedundantConnectionII {
 			if (parent[v] != 0) { // node has two parents
 				candidate1 = new int[]{parent[v], v};
 				candidate2 = new int[]{u, v};
-				edge[1] = 0; // invalidate cur edge
+				edge[1] = 0; // invalidate cur edge ***important
 			} else {
 				parent[v] = u;
 			}
@@ -61,12 +61,12 @@ public class RedundantConnectionII {
 				if (candidate1[0] == -1) {
 					return edge;
 				} else {
-					return candidate1;
+					return candidate1; // return candidate2 because candidate1 has been set valid
 				}
 			}
 			parent[v] = u;
 		}
-		return candidate2;
+		return candidate2; // if removing the edge of candidate2 makes the tree valid, candidate2 is redundant
 	}
 	private int findRoot(int val, int[] parent) {
 		if (val != parent[val]) {
