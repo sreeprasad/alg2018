@@ -4,8 +4,7 @@ import java.util.*;
 
 public class WebCrawler implements Runnable {
 
-	private String state = "processing";
-	private String domain = "";
+	private String domain;
 
 	private Queue<String> queue;
 	private Set<String> record; // result
