@@ -121,15 +121,13 @@ public class WebCrawlerDemo {
 		}
 
 		while (true) {
-			synchronized (new Object()) {
-				if (r.set.size() > 100) {
-					t1.interrupt();
-					t2.interrupt();
-					t3.interrupt();
-					t4.interrupt();
-					System.out.println("Over");
-					break;
-				}
+			if (r.queue.size() < 1) {
+				t1.interrupt();
+				t2.interrupt();
+				t3.interrupt();
+				t4.interrupt();
+				System.out.println("Over");
+				break;
 			}
 		}
 
