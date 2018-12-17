@@ -44,7 +44,7 @@ class WebCrawlerResource {
 				throw e;
 			}
 		}
-		if (!queue.isEmpty()) {
+		while (queue.size() > 0) {
 			System.out.println(Thread.currentThread().getName() + "-------pop " + queue.poll());
 		}
 		flag = false;
@@ -112,14 +112,23 @@ public class WebCrawlerDemo {
 		t3.start();
 		t4.start();
 
+		// give t1 ~ t4 some time to run
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+
+		}
+
 		while (true) {
-			if (r.set.size() > 100) {
-				t1.interrupt();
-				t2.interrupt();
-				t3.interrupt();
-				t4.interrupt();
-				System.out.println("Over");
-				break;
+			synchronized (new Object()) {
+				if (r.set.size() > 100) {
+					t1.interrupt();
+					t2.interrupt();
+					t3.interrupt();
+					t4.interrupt();
+					System.out.println("Over");
+					break;
+				}
 			}
 		}
 
