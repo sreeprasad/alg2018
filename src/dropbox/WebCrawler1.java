@@ -2,14 +2,14 @@ package dropbox;
 
 import java.util.*;
 
-public class WebCrawler implements Runnable {
+public class WebCrawler1 implements Runnable {
 
 	private String domain;
 
 	private Queue<String> queue;
 	private Set<String> record; // result
 
-	WebCrawler (String domain) {
+	WebCrawler1(String domain) {
 		this.domain = domain;
 		queue = new LinkedList<>();
 		record = new HashSet<>();
@@ -38,7 +38,7 @@ public class WebCrawler implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		WebCrawler wc = new WebCrawler("http://www.google.com");
+		WebCrawler1 wc = new WebCrawler1("http://www.google.com");
 		Thread t1 = new Thread(wc);
 		Thread t2 = new Thread(wc);
 		Thread t3 = new Thread(wc);
