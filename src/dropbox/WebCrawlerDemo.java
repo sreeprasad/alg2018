@@ -1,7 +1,16 @@
 package dropbox;
 
 import java.util.*;
+/*
+Two ways to stop thread：
+1，定义标记，让run方法结束。
+	run方法中一般都定义循环。只要控制住循环条件即可。
+	但是这种方式有局限性，如果线程进入到冻结状态，是不会读取标记的。那么线程是不会停止的。
+2，中断线程。其实就是清除线程的冻结状态，让线程恢复到可运行状态，这样就可以让线程去读取标记，并结束线程。
+停止线程原理：就是让run方法结束。
 
+还是不知道如何结束？？？
+ */
 class WebCrawlerResource {
 	Queue<String> queue = new LinkedList<>();
 	Set<String> set = new HashSet<>();
