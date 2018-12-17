@@ -9,7 +9,7 @@ let run() end
 class WebCrawlerResource {
 	Queue<String> queue = new LinkedList<>();
 	Set<String> set = new HashSet<>();
-	boolean flag = false;
+	private boolean flag = false;
 
 	public synchronized void add() throws InterruptedException {
 		while (flag) {
@@ -63,6 +63,7 @@ class Input implements Runnable {
 
 	@Override
 	public void run() {
+
 		while (!stop) {
 			try {
 				resource.add();
